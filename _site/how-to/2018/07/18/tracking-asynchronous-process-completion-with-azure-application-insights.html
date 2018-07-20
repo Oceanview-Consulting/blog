@@ -1,0 +1,70 @@
+<p>Recently I was working with a client that had developed several Azure based micro-services intended to run as an HTTP triggered process, running asynchronously from the client's perspective. In other words, each pass through the system started with an HTTP request, for which the payload was then passed through a series of micro-services utilizing a combination of service buses and storage queues. It looks something like this:</p>
+<p><img class="alignnone size-full wp-image-98" src="/c:/ovsite/assets/async-process.png" alt="Async Process" width="960" height="560" /></p>
+<p>The details are not terribly important - just note that each of the blue boxes in this diagram represents a separate Azure hosted ASP.NET WebAPI or Azure Function based micro-service. Because these were all separate components communicating via service bus and storage queues, plus one black box 3rd party system, message loss and round trip request duration was difficult to track and build into an easily consumable dashboard.</p>
+<p>To address this problem, a solution was developed utilizing a combination of custom telemetry events logged by each system component and Application Insights queries .</p>
+<h4>Creating Telemetry Events</h4>
+<p>Let's start with the telemetry events. The goal here is to provide Application Insights with events at each step in the system, tagged with a request identifier value. The TelemetryClient included in the Application Insights package published by Microsoft makes this pretty easy.</p>
+<p>First, add the <code class="EnlighterJSRAW" data-enlighter-language="shell">Microsoft.ApplicationInsights</code> NuGet package to the project you want to track events from. You can do this either via the Manage Nuget Packages interface, or via the Package Console using <code class="EnlighterJSRAW" data-enlighter-language="shell">Install-Package Microsoft.ApplicationInsights</code>.</p>
+<p>Next, we need to create a telemetry client. To do this, we need an instrumentation key, which Application Insights utilizes to route telemetry to the correct instance. In this case, we are relying on the <em>APPINSIGHTS_INSTRUMENTATIONKEY</em> app setting, which gets set automatically by azure when you enable Application Insights for a function application.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="csharp">using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+
+TelemetryClient telemetryClient = new TelemetryClient(
+    new TelemetryConfiguration
+    {
+        InstrumentationKey = ConfigurationManager.AppSettings["APPINSIGHTS_INSTRUMENTATIONKEY"]
+    }
+);</pre>
+<p>Finally, we can add the telemetry event by creating a TelemetryEvent object and using our client to track it. The trick here is to set the context operation_Id to a value that each component in our system will have access to, so that we can correlate the events on that value.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="csharp">var trackingEvent = new EventTelemetry("Intake");
+trackingEvent.Context.Operation.Id = requestId;
+_telemetryClient.TrackEvent(trackingEvent);</pre>
+<p>The same two code segments can be used in each component in the system. At a minimum, to track request completion, events will need to be added for the initial intake component (typically an API or HTTP triggered Azure function) and the final component in the system (typically a response notification method). The only thing that needs to change is the "EventName" string, which should be unique for each location you'd like to track.</p>
+<h4>Reporting</h4>
+<p>With telemetry events being provided to Application Insights, we have the data we need to track the two metrics we care about:</p>
+<ol>
+<li>How long it takes a request to make it from intake through the final component of the system (<strong>Request Duration</strong>).</li>
+<li>How many, if any, requests fail to make it all the way through the system (<strong>Failed Requests</strong>).</li>
+</ol>
+<p>The first step for both of these metrics is to generate a list of requests taken in (with a corresponding timestamp), joined together (by operation id) with the corresponding final step events. For our purposes, we will assume the relevant events are named "Intake" and "Complete".</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql">// Capture some variables; this is primarily to aid re-use / configuration
+let startEvent = "Intake";
+let completeEvent = "Complete";
+let eventsData = customEvents; // This can be used to enable cross AI instance reporting. 
+let granularity = time(1m);
+let rangeStart = bin(ago(24h), granularity);
+let rangeEnd = bin(now(), granularity);
+eventsData
+| where name == startEvent and timestamp between (rangeStart..rangeEnd)
+| project start = timestamp, operation_Id
+| join kind=leftouter
+(
+    eventsData
+    | where name == completeEvent
+    | project complete = timestamp, operation_Id
+)
+on operation_Id</pre>
+<p>Most of this should be pretty straightforward if you've played around with Application Insights before. The one thing worth calling out is the use of the eventsData variable. Because Azure apps are frequently split across regions, and Application Insights instances can be included in that split, it is sometimes useful to query multiple instances. To do this, you can union multiple customEvents tables like so*:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql">let eventsData = app('east-ai-instance').customEvents | union app('west-ai-instance').customEvents</pre>
+<p>The end result of this query is a table with four columns:</p>
+<p><img class="alignnone size-full wp-image-139" src="/c:/ovsite/assets/base_events-1.png" alt="" width="905" height="186" /></p>
+<p>Using this data set as a base, we can filter and project the events into the two data points we care about.</p>
+<h5>Duration</h5>
+<p>Producing the duration dataset requires minimal changes to the base query; simply add two clauses:</p>
+<div>
+<div>| where isnull(complete) == false</div>
+<div>| project start, duration = (complete - start)/time(1s)</div>
+</div>
+<div></div>
+<div>By using the where clause to filter out the records with no completion, we ensure we are only retrieving completed requests. Following that by projecting the start timestamp and a quick calculation of the duration gives us our final table with two columns: start and duration. With that data, we can create a chart of the requests and their duration.</div>
+<div></div>
+<div><img class="alignnone size-full wp-image-145" src="/c:/ovsite/assets/durchart.png" alt="" width="1582" height="567" /></div>
+<div></div>
+<h5>Failed Requests</h5>
+<p>Producing the failed request data set is even easier, because we don't have to do any calculations in the projection. Simply filter out the records with completion events (and those started within the last 5 minutes) and project the start and operation_Id as follows:</p>
+<p>| where isnull(complete) and start &lt; ago(5m)<br />
+| project start, operation_Id</p>
+<p>With those additions, we can generate a table of failed requests, with corresponding request IDs.</p>
+<p><img class="alignnone size-full wp-image-146" src="/c:/ovsite/assets/failreq.png" alt="" width="435" height="156" /></p>
+<p>There is an advanced version of this that can be turned into a chart for dashboards as well. If you'd like to learn more about that, or about custom charts on dashboards in general, check back soon as I'll be covering that topic next  -or just following me on <a href="https://twitter.com/sysgineer">Twitter @sysgineer</a> to be notified of all my upcoming articles. In the mean time, feel free to <a href="https://github.com/Oceanview-Consulting/CustomTelemetrySample">pull down the example app</a> and let me know if you have questions!</p>
+<p><sub>* For more information, see <a href="https://azure.microsoft.com/en-us/blog/query-across-resources/" target="_blank" rel="noopener">this article from Microsoft</a>.</sub></p>
