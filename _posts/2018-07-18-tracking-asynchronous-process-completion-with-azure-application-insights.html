@@ -12,7 +12,7 @@ tags:
     triggered process, running asynchronously from the client's perspective. In other words, each pass through the
     system started with an HTTP request, for which the payload was then passed through a series of micro-services
     utilizing a combination of service buses and storage queues. It looks something like this:</p>
-<p><img class="alignnone size-full wp-image-98" src="{{ '/assets/post_assets/async-process.png' | absolute_url }}"
+<p><img class="alignnone size-full wp-image-98" src="{{ '/assets/post_assets/async-process.png' | relative_url }}"
         alt="Async Process" width="960" height="560"/></p>
 <p>The details are not terribly important - just note that each of the blue boxes in this diagram represents a separate
     Azure hosted ASP.NET WebAPI or Azure Function based micro-service. Because these were all separate components
@@ -96,7 +96,7 @@ on operation_Id
 let eventsData = app('east-ai-instance').customEvents | union app('west-ai-instance').customEvents
 {% endhighlight %}
 <p>The end result of this query is a table with four columns:</p>
-<p><img class="alignnone size-full wp-image-139" src="{{ '/assets/post_assets/base_events-1.png' | absolute_url }}" alt=""
+<p><img class="alignnone size-full wp-image-139" src="{{ '/assets/post_assets/base_events-1.png' | relative_url }}" alt=""
         width="905" height="186"/></p>
 <p>Using this data set as a base, we can filter and project the events into the two data points we care about.</p>
 <h5>Duration</h5>
@@ -112,7 +112,7 @@ let eventsData = app('east-ai-instance').customEvents | union app('west-ai-insta
     duration.
 </div>
 <div></div>
-<div><img class="alignnone size-full wp-image-145" src="{{ '/assets/post_assets/durchart.png' | absolute_url }}" alt=""
+<div><img class="alignnone size-full wp-image-145" src="{{ '/assets/post_assets/durchart.png' | relative_url }}" alt=""
           width="1582" height="567"/></div>
 <div></div>
 <h5>Failed Requests</h5>
@@ -124,7 +124,7 @@ let eventsData = app('east-ai-instance').customEvents | union app('west-ai-insta
 | project start, operation_Id
 {% endhighlight %}
 <p>With those additions, we can generate a table of failed requests, with corresponding request IDs.</p>
-<p><img class="alignnone size-full wp-image-146" src="{{ '/assets/post_assets/failreq.png' | absolute_url }}" alt=""
+<p><img class="alignnone size-full wp-image-146" src="{{ '/assets/post_assets/failreq.png' | relative_url }}" alt=""
         width="435" height="156"/></p>
 <p>There is an advanced version of this that can be turned into a chart for dashboards as well. If you'd like to learn
     more about that, or about custom charts on dashboards in general, check back soon as I'll be covering that topic

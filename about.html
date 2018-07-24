@@ -6,7 +6,7 @@ type: page
 name: about
 ---
 <p><span style="font-weight: 400;"><img class="alignleft size-medium wp-image-22"
-                                        src="{{ 'assets/images/stokes-travis.jpg' | absolute_url}}"
+                                        src="{{ 'assets/images/stokes-travis.jpg' | relative_url}}"
                                         alt="Stokes, Travis" width="300" height="200"/>Travis is a seasoned software developer with experience in a variety of industries including finance, healthcare, hospitality, academics, and decision support systems for both the for-profit and non-profit sectors.  In his various consultant and director roles he has lead initiatives of all sizes and worked with small companies making under a million dollars in revenue all the way up to national, industry leading brands with multi-billion dollar market caps.</span>
 </p>
 <p><span style="font-weight: 400;">In addition to being an Old Dominion University graduate, Travis constantly strives to continue building his knowledge of the software industry via conferences, certifications and professional organizations.  He has previously obtained several Microsoft credentials and is an active, PMP certified member of the Project Management Institute. </span>
@@ -33,7 +33,7 @@ name: about
     <p class='contact-submit'>
         <input type='submit' value='Submit &#187;' class='pushbutton-wide'/>
         <input type='hidden' name='form-type' value='contact' />
-        <input type="hidden" name="_next" value="{{ '/about?submission=true' | absolute_url }}" />
+        <input type="hidden" name="_next" value="{{ '/about?submission=true' | relative_url }}" />
         <input type="text" name="_gotcha" style="display:none" />
     </p>
 </form>
