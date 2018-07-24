@@ -1,0 +1,39 @@
+---
+layout: main
+title: About Travis
+date: 2018-07-14 05:09:40.000000000 -04:00
+type: page
+---
+<p><span style="font-weight: 400;"><img class="alignleft size-medium wp-image-22"
+                                        src="{{ 'assets/images/stokes-travis.jpg' | absolute_url}}"
+                                        alt="Stokes, Travis" width="300" height="200"/>Travis is a seasoned software developer with experience in a variety of industries including finance, healthcare, hospitality, academics, and decision support systems for both the for-profit and non-profit sectors.  In his various consultant and director roles he has lead initiatives of all sizes and worked with small companies making under a million dollars in revenue all the way up to national, industry leading brands with multi-billion dollar market caps.</span>
+</p>
+<p><span style="font-weight: 400;">In addition to being an Old Dominion University graduate, Travis constantly strives to continue building his knowledge of the software industry via conferences, certifications and professional organizations.  He has previously obtained several Microsoft credentials and is an active, PMP certified member of the Project Management Institute. </span>
+</p>
+<p><span style="font-weight: 400;">While software analysis and development have been the backbone of his career, Travis’s real passion is in analyzing and providing guidance on the practices and processes used by development teams.  His dedication to creating not only better software, but a better software industry through advocating for implementation of best practices, well defined development standards, and consistent, predictable software development life-cycles is ultimately what drove him to create Oceanview Consulting.</span>
+</p>
+<h4>Contact</h4>
+<div id="contact-form-2">
+<form action='https://formspree.io/{{site.email}}' method='post' class='contact-form commentsblock'>
+    <div>
+        <label for='name' class='grunion-field-label name'>Name<span>(required)</span></label>
+        <input type='text' name='name' id='name' value='' class='name'  required aria-required='true'/>
+    </div>
+
+    <div>
+        <label for='email' class='grunion-field-label email'>Email<span>(required)</span></label>
+        <input type='email' name='email' id='email' value='' class='email'  required aria-required='true'/>
+    </div>
+
+    <div>
+        <label for='comment' class='grunion-field-label textarea'>Comment<span>(required)</span></label>
+        <textarea name='comment' id='comment' rows='20' class='textarea'  required aria-required='true'></textarea>
+    </div>
+    <p class='contact-submit'>
+        <input type='submit' value='Submit &#187;' class='pushbutton-wide'/>
+        <input type='hidden' name='form-type' value='contact' />
+        <input type="hidden" name="_next" value="{{ '/about?submission=true' | absolute_url }}" />
+        <input type="text" name="_gotcha" style="display:none" />
+    </p>
+</form>
+</div>

@@ -1,5 +1,25 @@
+excerpt_separator: "<!--more-->"
+linenos: true
+email: travis@ovitconsulting.com
 plugins:
   - jekyll-gist
   - jekyll-coffeescript
   - jekyll-assets
   - jekyll-admin
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post" # overrides previous default layout
+      author:
+        display_name: Travis Stokes
+        first_name: Travis
+        last_name: Stokes

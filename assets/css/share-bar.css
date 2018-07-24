@@ -1,0 +1,101 @@
+/* Share Bar */
+#share-bar {
+    font-size: 20px;
+    display: inline-block;
+    border-top: 1px white solid;
+}
+
+/* Title */
+#share-bar h4 {
+}
+
+/* All buttons */
+.share-buttons {
+    /*border: 1px #404040 solid;
+    padding: 0px;
+    background: #AAAAAA;*/
+    display: inline-block;
+}
+
+.share-buttons a:hover {
+    text-decoration: none;
+    color: initial;
+}
+
+/* Each button */
+.share-button {
+    margin: 0px;
+    margin-right: 5px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    width: auto;
+    height: auto;
+    background: #DDDDDD;
+    padding: 8px;
+    line-height: 1;
+    font-size: 18px;
+}
+
+a:first-of-type .share-button {
+    margin-left: 5px;
+}
+
+.share-button:hover {
+    opacity: 1;
+}
+
+/* Facebook button */
+.socicon-facebook {
+    color: #3b5998;
+}
+.fa-facebook-official:hover {
+}
+
+/* Twitter button */
+.socicon-twitter {
+    color: #55acee;
+}
+.fa-twitter:hover {
+}
+
+/* Google-PLus button */
+.socicon-googleplus {
+    color: #dd4b39;
+}
+.fa-google-plus:hover {
+}
+
+/* Pinterest button */
+.socicon-pinterest {
+    color: #cb2027;
+}
+.fa-pinterest-p:hover {
+}
+
+/* Tumblr button */
+.socicon-tumblr {
+    color: #32506d;
+}
+.fa-tumblr:hover {
+}
+
+/* Reddit button */
+.socicon-reddit {
+    color: #ff4500;
+}
+.fa-reddit-alien:hover {
+}
+
+/* LinkedIn button */
+.socicon-linkedin {
+    color: #007bb5;
+}
+.fa-linkedin:hover {
+}
+
+/* Email button */
+.fa-envelope {
+    color: #444444;
+}
+.fa-envelope:hover {
+}

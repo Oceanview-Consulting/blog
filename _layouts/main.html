@@ -1,0 +1,106 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Oceanview Consulting &#8211; Helping developers and businesses identify and fulfill their software leadership
+        potential</title>
+    <link rel="alternate" type="application/rss+xml" title="Oceanview Consulting &raquo; Feed"
+          href='{{ "/feed/" | absolute_url }}'/>
+    <link rel="alternate" type="application/rss+xml" title="Oceanview Consulting &raquo; Comments Feed"
+          href='{{ "/comments/feed/" | absolute_url}}'/>
+    <link rel='stylesheet' id='escutcheon-style-css'
+          href='{{ "/assets/css/style.css" | absolute_url }}'
+          type='text/css' media='all'/>
+    <link rel='stylesheet' id='custom-css'
+          href='{{ "/assets/css/custom.css" | absolute_url }}'
+          type='text/css' media='all'/>
+    <link rel='stylesheet' id='escutcheon-fonts-css'
+          href='{{ "/assets/css/fonts.css" | absolute_url }}'
+          type='text/css' media='all'/>
+    <link rel='stylesheet' id='highlighter-css'
+          href='{{ "/assets/css/pygment/native.css" | absolute_url }}'
+          type='text/css' media='all'/>
+    <link rel='stylesheet' id='share-bar-css'
+          href='{{ "/assets/css/share-bar.css" | absolute_url }}'
+          type='text/css' media='all'/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/socicon-fonts.css' | absolute_url }}">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Oceanview Consulting"/>
+    <meta property="og:description"
+          content="Helping developers and businesses identify and fulfill their software leadership potential"/>
+    <meta property="og:url" content="https://ovitconsulting.com/"/>
+    <meta property="og:site_name" content="Oceanview Consulting"/>
+    <meta property="og:image"
+          content='{{ "/assets/images/logo_darkbg_transparent.png?fit=3351%2C879&amp;ssl=1" | absolute_url}}'
+    <meta property="og:image:width" content="3351"/>
+    <meta property="og:image:height" content="879"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta name="twitter:site" content="@sysgineer"/>
+</head>
+
+<body class="home blog logged-in admin-bar no-customize-support has-site-logo">
+<div id="page" class="hfeed site">
+    <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+    <header id="masthead" class="site-header" role="banner">
+        <div class="navigation-wrapper">
+            <nav id="site-navigation" class="main-navigation" role="navigation">
+                <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">Menu</button>
+                <div class="menu-primary-container">
+                    <ul id="menu-primary" class="menu">
+                        <li id="menu-item-6"
+                            class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-6">
+                            <a href="/">Home</a></li>
+                        <li id="menu-item-48"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48"><a
+                                href="{{ '/presentations.html' | absolute_url}}">Past Presentations</a></li>
+                        <li id="menu-item-7"
+                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7"><a
+                                href="{{ '/about' | absolute_url }}">About Travis</a></li>
+                    </ul>
+                </div>
+            </nav><!-- #site-navigation -->
+        </div>
+
+        <div class="site-branding">
+            <a href="{{ site.url }}" class="site-logo-link" rel="home" itemprop="url"><img width="200"
+                                                                                                        height="52"
+                                                                                                        src="{{ 'assets/images/logo_darkbg_transparent.png' | absolute_url }}"
+                                                                                                        class="site-logo attachment-escutcheon-logo"
+                                                                                                        alt=""
+                                                                                                        data-size="escutcheon-logo"
+                                                                                                        itemprop="logo"
+                                                                                                        data-attachment-id="16"
+                                                                                                        data-permalink="{{ 'assets/images/logo_darkbg_transparent.png' | absolute_url }}"
+                                                                                                        data-orig-file="{{ 'assets/images/logo_darkbg_transparent.png' | absolute_url }}"
+                                                                                                        data-orig-size="3351,879"
+                                                                                                        data-image-title="logo_darkbg_transparent"
+                                                                                                        /></a>
+            <h1 class="site-title"><a href="{{ site.url }}" rel="home">Oceanview Consulting</a></h1>
+            <h2 class="site-description">Helping developers and businesses identify and fulfill their software
+                leadership potential</h2>
+        </div><!-- .site-branding -->
+
+    </header><!-- #masthead -->
+
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main" role="main">
+                {{ content }}
+            </main><!-- #main -->
+        </div><!-- #primary -->
+    </div><!-- #content -->
+    <footer id="colophon" class="site-footer" role="contentinfo">
+        <div class="site-info">
+            Copyright 2018 Oceanview Consulting, LLC
+        </div><!-- .site-info -->
+    </footer><!-- #colophon -->
+</div><!-- #page -->
+</body>
+</html>

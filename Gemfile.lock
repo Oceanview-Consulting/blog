@@ -137,6 +137,7 @@ DEPENDENCIES
   jekyll-assets
   jekyll-coffeescript
   jekyll-gist
+  rouge
 
 BUNDLED WITH
    1.16.3

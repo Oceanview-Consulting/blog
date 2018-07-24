@@ -1,0 +1,33 @@
+---
+title: Home
+regenerate: true
+layout: main
+---
+
+{% for post in site.posts %}
+<article class="clear post type-post status-publish format-standard hentry category-how-to tag-appinsights tag-azure tag-c">
+    <div class="entry-meta">
+        <span class="byline"> Written by
+            <span class="author vcard">
+                <a class="url fn n" href="{{ '/about.html' | absolute_url}}">{{ post.author.display_name }}</a>
+            </span>
+        </span>
+        <span class="posted-on">
+            <a href="{{ post.url }}" rel="bookmark">
+                <time class="entry-date published" datetime="{{ post.date | date_to_xmlschema}}">{{ post.date | date_to_string: "ordinal", "US" }}</time>
+            </a>
+        </span>
+    </div>
+    <!-- .entry-meta -->
+    <div class="entry-wrapper">
+        <header class="entry-header">
+            <h1 class="entry-title">
+                <a href="{{ post.url }}" rel="bookmark">{{ post.title }}</a>
+            </h1>
+        </header><!-- .entry-header -->
+        <div class="entry-summary">
+            {{ post.excerpt }}
+        </div><!-- .entry-summary -->
+    </div>
+</article><!-- #post-## -->
+{% endfor %}
