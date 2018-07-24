@@ -55,14 +55,19 @@
                 <div class="menu-primary-container">
                     <ul id="menu-primary" class="menu">
                         <li id="menu-item-6"
-                            class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-6">
+                            class="menu-item menu-item-type-custom menu-item-object-custom
+                            {% if '/' == page.url %}current-menu-item current_page_item{% endif %}">
                             <a href="/">Home</a></li>
                         <li id="menu-item-48"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-48"><a
-                                href="{{ '/presentations.html' | absolute_url}}">Past Presentations</a></li>
+                            class="menu-item menu-item-type-custom menu-item-object-custom
+                            {% if '/presentations.html' == page.url %}current-menu-item current_page_item{% endif %}">
+                            <a href="{{ '/presentations.html' | absolute_url}}">Past Presentations</a>
+                        </li>
                         <li id="menu-item-7"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7"><a
-                                href="{{ '/about' | absolute_url }}">About Travis</a></li>
+                            class="menu-item menu-item-type-custom menu-item-object-custom
+                            {% if '/about.html' == page.url %}current-menu-item current_page_item{% endif %}">
+                            <a href="{{ '/about.html' | absolute_url }}">About Travis</a>
+                        </li>
                     </ul>
                 </div>
             </nav><!-- #site-navigation -->
