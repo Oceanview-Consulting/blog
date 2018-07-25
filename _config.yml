@@ -1,7 +1,7 @@
 excerpt_separator: "<!--more-->"
 linenos: true
 email: travis@ovitconsulting.com
-url: 'https://oceanview-consulting.github.io'
+url: 'https://www.ovitconsulting.com'
 plugins:
   - jekyll-gist
   - jekyll-coffeescript
