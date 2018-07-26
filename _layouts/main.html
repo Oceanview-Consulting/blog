@@ -50,6 +50,24 @@
 
     <script src="/assets/js/jquery-3.3.1.min.js"></script>
     <script src="/assets/js/navigation.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+    <script>
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#efefef",
+                        "text": "#404040"
+                    },
+                    "button": {
+                        "background": "#8ec760",
+                        "text": "#ffffff"
+                    }
+                }
+            })});
+    </script>
 </head>
 
 <body class="home blog logged-in admin-bar no-customize-support has-site-logo">
@@ -107,7 +125,7 @@
     </div><!-- #content -->
     <footer id="colophon" class="site-footer" role="contentinfo">
         <div class="site-info">
-            Copyright 2018 Oceanview Consulting, LLC. | <a href="{% link privacy.md %}">Privacy Policy</a>
+            Copyright 2018 Oceanview Consulting, LLC. | <a href="{% link privacy.html %}">Privacy Policy</a>
         </div><!-- .site-info -->
     </footer><!-- #colophon -->
 </div><!-- #page -->
